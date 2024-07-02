@@ -21,6 +21,16 @@ app.get('/api/products', async (req, res)=>{
    }
 })
 
+app.get('/api/products/:id', async (req, res)=>{
+   try{
+      const {id} = req.params;
+        const product = await Product.findById(id);
+        res.status(200).json(product)
+   }catch(err){
+      res.status(500).json({message : err.message})
+   }
+})
+
 app.post('/api/products', async (req,res)=>{
    try{
        const product = await Product.create(req.body);
@@ -34,3 +44,14 @@ app.post('/api/products', async (req,res)=>{
 app.listen(5000,()=>{
     console.log('connected to 5000')
 })
+
+
+const Student = require('./models/student')
+
+const obj = {
+   id:"2100032302",
+   name:"Kishore",
+   email:"2100032302cseh@gmail.com"
+}
+
+Student.create(obj)
